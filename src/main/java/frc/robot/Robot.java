@@ -8,17 +8,18 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Climber;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
+ * @param <Climber>
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private Shooter shooter = new Shooter();
+  private Climber climber = new Climber();
   private Joystick joystick = new Joystick(0);
 
   private RobotContainer m_robotContainer;
@@ -86,9 +87,12 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    shooter.getShooterTalon1().set(joystick.getY());
-    shooter.getShooterTalon2().set(-joystick.getY());
-    shooter.getShooterVictor1().set(joystick.getY());
+    climber.getClimberSpark().set(joystick.getY());
+
+    //if(joystick.getRawButton(4)) {
+      //climber.getClimberSpark().set(0.5);
+    //}
+    
   }
 
   @Override
